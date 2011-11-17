@@ -12,7 +12,7 @@ The aim of this plugin is to rewrite the whole MCBans plugin from scratch to mak
 Commands
 --------
 
-Below is a list of commands supported by MCBans 4 Unnofficial (also known as MCBetterBans by mmaton)
+Below is a list of commands supported by MCBans 4 Unofficial (also known as MCBetterBans by mmaton)
 
 * /lookup <playername>
 * /kick <playername> [reason]
