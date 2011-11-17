@@ -1,0 +1,65 @@
+author: rakiru
+database: false
+description: A global banning system for Minecraft
+main: com.fuckingwin.bukkit.rakiru.mcbans.MCBansPlugin
+name: MCBans
+startup: postworld
+url: http://www.mcbans.com/
+version: '4.0'
+commands:
+  kick:
+    description: Kick a player from the server
+    permission: mcbans.kick
+    usage: /kick <player> - kicks a player from the server
+  ban:
+    description: Ban a player from the server
+    permission: mcbans.ban
+    usage: /ban <player> [g(global)] [reason]
+  tempban:
+    description: Ban a player from the server for a specified period of time
+    permission: mcbans.ban.temp
+    usage: /tempban <player> <duration> <m[inute[s]]|h[our[s]]|d[ay[s]]> [reason]
+  unban:
+    description: Unban a player from the server
+    permission: mcbans.ban.unban
+    usage: /unban <player>
+  lookup:
+    description: Lookup player's MCBans record
+    permission: mcbans.lookup
+    usage: /lookup <player>
+  mcbans:
+    description: Check status of MCBans and toggle online mode of plugin
+    permission: mcbans.mcbans
+    usage: /mcbans [status|online|offline]
+
+permissions:
+  mcbans.*:
+    description: All MCBans permissions
+    default: op
+    children:
+      mcbans.ban: true
+      mcbans.lookup: true
+      mcbans.mcbans: true
+      mcbans.kick: true
+  mcbans.ban:
+    description: All ban types
+    default: op
+    children:
+      mcbans.ban.local: true
+      mcbans.ban.global: true
+      mcbans.ban.temp: true
+      mcbans.ban.unban: true
+  mcbans.ban.local:
+    description: Locally ban a player
+  mcbans.ban.global:
+    description: Globally ban a player
+  mcbans.ban.temp:
+    description: Temporarily ban a player
+  mcbans.ban.unban:
+    description: Unban a player
+  mcbans.kick:
+    description: Kick a player
+  mcbans.lookup:
+    description: Lookup MCBans player record
+  mcbans.mcbans:
+    description: Misc MCBans functions
