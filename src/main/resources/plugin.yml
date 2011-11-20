@@ -63,3 +63,5 @@ permissions:
     description: Lookup MCBans player record
   mcbans.mcbans:
     description: Misc MCBans functions
+  mcbans.alerts:
+    description: View MCBans alerts such as update reminders

@@ -34,12 +34,12 @@ public class Lookup implements Runnable {
 	}
 
 	public void run() {
-		HashMap<String, String> url_items = new HashMap<String, String>();
-		JSONHandler webHandle = new JSONHandler(plugin);
-        url_items.put("player", playerName);
-        url_items.put("admin", senderName);
-        url_items.put("exec", "playerLookup");
-        JSONObject result = webHandle.handleJob(url_items);
+		HashMap<String, String> urlItems = new HashMap<String, String>();
+		JSONHandler webHandler = new JSONHandler(plugin);
+        urlItems.put("player", playerName);
+        urlItems.put("admin", senderName);
+        urlItems.put("exec", "playerLookup");
+        JSONObject result = webHandler.handleJob(urlItems);
 		try {
 			ArrayList<String> lines = new ArrayList();
 			lines.add(plugin.lang.getFormat("lookupSummary", playerName, result.getString("total"), result.getString("reputation")));

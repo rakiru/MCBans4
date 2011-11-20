@@ -7,6 +7,7 @@ package com.fuckingwin.bukkit.rakiru.mcbans.utils;
 
 import com.fuckingwin.bukkit.rakiru.mcbans.MCBansPlugin;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -44,7 +45,7 @@ public class PlayerMethods {
 		Player player;
 		BukkitScheduler scheduler = Bukkit.getScheduler();
 		try {
-			player = (Player)scheduler.callSyncMethod(plugin, new PlayerGetter(playerName)).get();
+			player = (Player)scheduler.callSyncMethod(plugin, new PlayerGetterExact(playerName)).get();
 		} catch (ExecutionException e) {
 			plugin.log.debug(e.toString());
 			player = null;
@@ -64,9 +65,25 @@ public class PlayerMethods {
 		return playerName;
 	}
 
+	public static List<String> getPlayerNames(MCBansPlugin plugin) throws InterruptedException {
+		ArrayList<String> players = new ArrayList();
+		BukkitScheduler scheduler = Bukkit.getScheduler();
+		try {
+			players = (ArrayList)scheduler.callSyncMethod(plugin, new PlayerNamesGetter()).get();
+		} catch (ExecutionException e) {
+			plugin.log.debug(e.toString());
+		}
+		return players;
+	}
+
 	public static void broadcast(MCBansPlugin plugin, String message) {
 		BukkitScheduler scheduler = Bukkit.getScheduler();
 		scheduler.scheduleSyncDelayedTask(plugin, new Broadcast(message));
+	}
+
+	public static void broadcast(MCBansPlugin plugin, String message, String permissionNode) {
+		BukkitScheduler scheduler = Bukkit.getScheduler();
+		scheduler.scheduleSyncDelayedTask(plugin, new Broadcast(message, permissionNode));
 	}
 
 	public static void broadcast(MCBansPlugin plugin, ArrayList<String> lines) {
@@ -139,24 +156,49 @@ public class PlayerMethods {
 		}
 	}
 
+	public static class PlayerNamesGetter implements Callable {
+
+		public PlayerNamesGetter() {
+		}
+
+		public Object call() {
+			return Bukkit.getOnlinePlayers();
+		}
+	}
+
 	public static class Broadcast implements Runnable {
 
 		String message;
+		String permissionNode;
 		ArrayList<String> lines;
 
 		public Broadcast(String message) {
 			this.message = message;
+			this.permissionNode = "";
+			this.lines = null;
+		}
+
+		public Broadcast(String message, String permissionNode) {
+			this.message = message;
+			this.permissionNode = permissionNode;
 			this.lines = null;
 		}
 
 		private Broadcast(ArrayList<String> lines) {
 			this.lines = lines;
+			this.permissionNode = "";
 			this.message = "";
 		}
 
 		public void run() {
 			if (lines == null) {
 				Bukkit.broadcastMessage(message);
+			} else if (!permissionNode.equalsIgnoreCase(permissionNode)) {
+				for (Player player : Bukkit.getOnlinePlayers()) {
+					if (player.hasPermission(permissionNode)) {
+						player.sendMessage(message);
+					}
+				}
 			} else {
 				for (String line : lines) {
 					Bukkit.broadcastMessage(line);
