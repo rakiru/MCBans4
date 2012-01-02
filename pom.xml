@@ -2,12 +2,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <!-- Project information -->
-    <groupId>com.fuckingwin.bukkit.rakiru.mcbans</groupId>
+    <groupId>com.mcbans</groupId>
     <artifactId>mcbans</artifactId>
-    <version>4</version>
+    <version>4.0</version>
     <name>MCBans${version}</name>
     <url>http://www.mcbans.com/</url>
-    <description>MCBans: A global banning system for Minecraft</description>
+    <description>A global banning system for Minecraft</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -38,11 +38,11 @@
 
     <!-- Dependencies -->
     <dependencies>
-        <!-- CraftBukkit -->
+        <!-- Bukkit -->
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>1.0.1-R2-SNAPSHOT</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>

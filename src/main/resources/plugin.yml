@@ -1,11 +1,11 @@
 author: rakiru
 database: false
-description: A global banning system for Minecraft
-main: com.fuckingwin.bukkit.rakiru.mcbans.MCBansPlugin
+description: ${project.description}
+main: com.mcbans.mcbans.MCBansPlugin
 name: MCBans
 startup: postworld
-url: http://www.mcbans.com/
-version: '4.0'
+url: '${project.url}'
+version: '${project.version}'
 commands:
   kick:
     description: Kick a player from the server
