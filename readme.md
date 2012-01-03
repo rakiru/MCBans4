@@ -7,13 +7,15 @@ More information can be found on the [MCBans website](http://www.mcbans.com/) or
 Commands
 --------
 
-Below is a list of commands supported by MCBans 4. These are due to change before release.
+Below is a list of commands supported by MCBans 4.
 
 * /lookup <playername>
 * /kick <playername> [reason]
-* /ban <playername> [g/reason] [reason]
+* /ban [flag] <playername> [<duration> <m[inutes]|h[ours]|d[ays]|w[eeks]>][reason]
+    * -t - Temp ban, requires the duration to be entered
+	* -g - Global ban, requires the reason to be entered
+	* -r - Rollback the player using LogBlock
 * /unban <playername>
-* /tempban <playername> <duration> <m[inutes]|h[ours]|d[ays]> [reason]
 
 Coding Standards
 ----------------
