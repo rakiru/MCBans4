@@ -22,7 +22,7 @@ Coding Standards
 ----------------
 
 * If in doubt, use the Sun/Oracle coding standards
-* Tab/spacing to be decided
+* Indentation should be tabs only (no spaces) (tabs are 4 characters wide)
 * Naming:
     * Packages should be lowercase
     * Class names should use UpperCamelCase (e.g. BanCommandHandler)
