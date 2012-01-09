@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.mcbans.mcbans.utils;
 
 import com.mcbans.mcbans.MCBansPlugin;
@@ -33,7 +28,7 @@ public class PlayerMethods {
 		Player player;
 		BukkitScheduler scheduler = Bukkit.getScheduler();
 		try {
-			player = (Player)scheduler.callSyncMethod(plugin, new PlayerGetter(playerName)).get();
+			player = (Player) scheduler.callSyncMethod(plugin, new PlayerGetter(playerName)).get();
 		} catch (ExecutionException e) {
 			plugin.log.debug(e.toString());
 			player = null;
@@ -45,7 +40,7 @@ public class PlayerMethods {
 		Player player;
 		BukkitScheduler scheduler = Bukkit.getScheduler();
 		try {
-			player = (Player)scheduler.callSyncMethod(plugin, new PlayerGetterExact(playerName)).get();
+			player = (Player) scheduler.callSyncMethod(plugin, new PlayerGetterExact(playerName)).get();
 		} catch (ExecutionException e) {
 			plugin.log.debug(e.toString());
 			player = null;
@@ -57,7 +52,7 @@ public class PlayerMethods {
 		String playerName;
 		BukkitScheduler scheduler = Bukkit.getScheduler();
 		try {
-			playerName = (String)scheduler.callSyncMethod(plugin, new PlayerNameGetter(player)).get();
+			playerName = (String) scheduler.callSyncMethod(plugin, new PlayerNameGetter(player)).get();
 		} catch (ExecutionException e) {
 			plugin.log.debug(e.toString());
 			playerName = "";
@@ -69,7 +64,7 @@ public class PlayerMethods {
 		ArrayList<String> players = new ArrayList();
 		BukkitScheduler scheduler = Bukkit.getScheduler();
 		try {
-			players = (ArrayList)scheduler.callSyncMethod(plugin, new PlayerNamesGetter()).get();
+			players = (ArrayList) scheduler.callSyncMethod(plugin, new PlayerNamesGetter()).get();
 		} catch (ExecutionException e) {
 			plugin.log.debug(e.toString());
 		}
@@ -96,6 +91,7 @@ public class PlayerMethods {
 		scheduler.scheduleSyncDelayedTask(plugin, new Message(sender, message));
 	}
 //Change player to commandsender
+
 	public static void message(MCBansPlugin plugin, CommandSender sender, ArrayList<String> lines) {
 		BukkitScheduler scheduler = Bukkit.getScheduler();
 		scheduler.scheduleSyncDelayedTask(plugin, new Message(sender, lines));
@@ -114,7 +110,6 @@ public class PlayerMethods {
 		public void run() {
 			player.kickPlayer(kickReason);
 		}
-
 	}
 
 	public static class PlayerGetter implements Callable {
@@ -205,7 +200,6 @@ public class PlayerMethods {
 				}
 			}
 		}
-
 	}
 
 	public static class Message implements Runnable {
@@ -235,6 +229,5 @@ public class PlayerMethods {
 				}
 			}
 		}
-
 	}
 }

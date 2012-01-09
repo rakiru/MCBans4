@@ -31,7 +31,7 @@ public class MCBansLogger {
 			write(s);
 		}
 	}
-	
+
 	/**
 	 * Debug level - writes to MCBans log
 	 * 

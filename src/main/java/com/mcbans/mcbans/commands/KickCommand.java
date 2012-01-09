@@ -1,7 +1,5 @@
 package com.mcbans.mcbans.commands;
 
-
-
 import com.mcbans.mcbans.MCBansPlugin;
 import java.util.List;
 import org.bukkit.command.Command;
@@ -31,7 +29,7 @@ public class KickCommand implements CommandExecutor {
 		String adminName = sender.getName();
 		String kickReason;
 		String playerName;
-		
+
 		switch (args.length) {
 			case 0:
 				//No arguments - show command usage
@@ -50,10 +48,10 @@ public class KickCommand implements CommandExecutor {
 				}
 				break;
 		}
-		
+
 		Player player;
 		List<Player> playerMatches = plugin.getServer().matchPlayer(playerName);
-		
+
 		switch (playerMatches.size()) {
 			case 0:
 				//No matching players - no-one to kick
@@ -75,7 +73,7 @@ public class KickCommand implements CommandExecutor {
 		player.kickPlayer(plugin.lang.getFormat("kickMessagePlayer", playerName, adminName, kickReason));
 		//Tell everyone that the player has been kicked
 		plugin.getServer().broadcastMessage(plugin.lang.getFormat("kickMessageSuccess", playerName, adminName, kickReason));
-		
+
 		return true;
 	}
 }

@@ -27,7 +27,7 @@ public class LookupCommand implements CommandExecutor {
 			sender.sendMessage(plugin.lang.getFormat("permissionDenied"));
 			return true;
 		}
-		
+
 		//lookup only supports one argument, a player name
 		if (args.length != 1) {
 			//Show usage

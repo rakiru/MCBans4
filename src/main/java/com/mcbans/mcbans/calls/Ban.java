@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.mcbans.mcbans.calls;
 
 import com.mcbans.mcbans.MCBansPlugin;
@@ -16,6 +11,7 @@ import org.bukkit.entity.Player;
  * @author Sean
  */
 public class Ban implements Runnable {
+
 	protected String playerName;
 	protected final MCBansPlugin plugin;
 	protected final String adminName;
@@ -39,5 +35,4 @@ public class Ban implements Runnable {
 			plugin.log.debug(e.toString());
 		}
 	}
-
 }

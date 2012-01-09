@@ -11,37 +11,37 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class MCBansPlugin extends JavaPlugin {
 
-    public final MCBansLogger log = new MCBansLogger(this);
-    public final Config config = new Config(this);
-    public final Language lang = new Language();
-
+	public static final String BUILD_NUMBER = "${env.bambooBuildNumber}";
+	public final MCBansLogger log = new MCBansLogger(this);
+	public final Config config = new Config(this);
+	public final Language lang = new Language();
 	private boolean isOnline = true;
 
-    public void onDisable() {
-        // Output to console that plugin is disabled
-        PluginDescriptionFile pdfFile = this.getDescription();
-        System.out.println(pdfFile.getName() + " version " + pdfFile.getVersion() + " disabled!");
-    }
+	public void onDisable() {
+		// Output to console that plugin is disabled
+		PluginDescriptionFile pdfFile = this.getDescription();
+		System.out.println(pdfFile.getName() + " version " + pdfFile.getVersion() + " disabled!");
+	}
 
-    public void onEnable() {
-        // Load config
-        config.load();
+	public void onEnable() {
+		// Load config
+		config.load();
 
-        // Get plugin info from plugin.yml
-        PluginDescriptionFile pdfFile = this.getDescription();
-        log.info("Using bukkit permissions");
+		// Get plugin info from plugin.yml
+		PluginDescriptionFile pdfFile = this.getDescription();
+		log.info("Using bukkit permissions");
 
-        // Register commands
-        getCommand("mcbans").setExecutor(new MCBansCommand(this));
-        getCommand("lookup").setExecutor(new LookupCommand(this));
-        getCommand("ban").setExecutor(new BanCommand(this));
-        getCommand("unban").setExecutor(new UnbanCommand(this));
-        getCommand("kick").setExecutor(new KickCommand(this));
-        getCommand("tempban").setExecutor(new TempbanCommand(this));
+		// Register commands
+		getCommand("mcbans").setExecutor(new MCBansCommand(this));
+		getCommand("lookup").setExecutor(new LookupCommand(this));
+		getCommand("ban").setExecutor(new BanCommand(this));
+		getCommand("unban").setExecutor(new UnbanCommand(this));
+		getCommand("kick").setExecutor(new KickCommand(this));
+		getCommand("tempban").setExecutor(new TempbanCommand(this));
 
-        // Output to console that plugin is enabled
-        log.info(pdfFile.getName() + " version " + pdfFile.getVersion() + " enabled!");
-    }
+		// Output to console that plugin is enabled
+		log.info(pdfFile.getName() + " version " + pdfFile.getVersion() + " enabled!");
+	}
 
 	/**
 	 * Gets the state of the MCBans plugin
@@ -68,7 +68,6 @@ public class MCBansPlugin extends JavaPlugin {
 	 * @param adminName Name to be attached as player who placed the ban
 	 */
 	public void banPlayer(String playerName, String type, String reason, String adminName) {
-
 	}
 
 	/**
@@ -102,7 +101,6 @@ public class MCBansPlugin extends JavaPlugin {
 	 * @param adminName Name to be attached as player who placed the ban
 	 */
 	public void tempBanPlayer(String playerName, float time, String units, String reason, String adminName) {
-
 	}
 
 	/**
@@ -124,6 +122,5 @@ public class MCBansPlugin extends JavaPlugin {
 	 * @param adminName Name to be attached as player who kicked the player
 	 */
 	public void kickPlayer(String playerName, String adminName) {
-
 	}
 }

@@ -11,20 +11,20 @@ import org.bukkit.entity.Player;
  */
 public class MCBansAPI {
 
-        public static MCBansAPI instance;
+	public static MCBansAPI instance;
 	private MCBansPlugin plugin;
 	private Config config;
-        private HashMap<String, Boolean> isStaffList = new HashMap<String, Boolean>();
+	private HashMap<String, Boolean> isStaffList = new HashMap<String, Boolean>();
 
-	public MCBansAPI (MCBansPlugin plugin) {
+	public MCBansAPI(MCBansPlugin plugin) {
 		this.plugin = plugin;
 		this.config = plugin.config;
-                MCBansAPI.instance = this;
+		MCBansAPI.instance = this;
 	}
 
-        /**
+	/**
 	 * Get the instance of MCBansAPI
-         *
+	 *
 	 * @return The instance of MCBansAPI
 	 */
 	private static MCBansAPI getInstance() {
@@ -43,12 +43,12 @@ public class MCBansAPI {
 	 * @param measure Type of time units to temporarily ban for
 	 */
 	private void banPlayer(String playerName, String playerIP, BanType type, String reason, String adminName, String duration, String measure) {
-            new Ban(plugin, type, playerName, playerIP, adminName, reason, duration, measure).start();
-            if (type == BanType.GLOBAL) {
-                kickPlayer(playerName, "You have been globally banned. Check MCBans.com", adminName);
-            } else {
-                kickPlayer(playerName, reason, adminName);
-            }
+		//TODO: Run ban callback here
+		if (type == BanType.GLOBAL) {
+			kickPlayer(playerName, "You have been globally banned. Check MCBans.com", adminName);
+		} else {
+			kickPlayer(playerName, reason, adminName);
+		}
 	}
 
 	/**
@@ -218,11 +218,11 @@ public class MCBansAPI {
 	 * @param adminName Name to be attached as player who kicked the player
 	 */
 	public void kickPlayer(String playerName, String reason, String adminName) {
-            Player player = plugin.getServer().getPlayerExact(playerName);
-            if (player != null) {
-                player.kickPlayer(reason);
-            }
-            //TODO: Log to mcbans log file
+		Player player = plugin.getServer().getPlayerExact(playerName);
+		if (player != null) {
+			player.kickPlayer(reason);
+		}
+		//TODO: Log to mcbans log file
 	}
 
 	/**
@@ -252,21 +252,20 @@ public class MCBansAPI {
 	 */
 	public boolean isMCBansStaff(String playerName) {
 		if (isStaffList.containsKey(playerName)) {
-                    return isStaffList.get(playerName);
-                } else {
-                    //TODO: Call MCBans server and check
-                    return false;
-                }
+			return isStaffList.get(playerName);
+		} else {
+			//TODO: Call MCBans server and check
+			return false;
+		}
 	}
 
-        protected void setMCBansStaff(String playerName, boolean isStaff) {
-            isStaffList.put(playerName, isStaff);
-        }
+	protected void setMCBansStaff(String playerName, boolean isStaff) {
+		isStaffList.put(playerName, isStaff);
+	}
 
 	////////////////////////////
 	/////// Util methods ///////
 	////////////////////////////
-
 	private String getPlayerIP(String playerName) {
 		Player player = plugin.getServer().getPlayerExact(playerName);
 		if (player != null) {

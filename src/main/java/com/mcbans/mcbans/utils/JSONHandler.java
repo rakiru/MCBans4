@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mcbans.mcbans.utils;
 
 import com.mcbans.mcbans.MCBansPlugin;
