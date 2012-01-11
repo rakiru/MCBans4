@@ -11,7 +11,8 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class MCBansPlugin extends JavaPlugin {
 
-	public static final String BUILD_NUMBER = "${env.bambooBuildNumber}";
+	public static final String BUILD_NUMBER = "@@BUILDVERSION@@";
+	public static final String GIT_REVISION = "@@GITREVISION@@";
 	public final MCBansLogger log = new MCBansLogger(this);
 	public final Config config = new Config(this);
 	public final Language lang = new Language();
