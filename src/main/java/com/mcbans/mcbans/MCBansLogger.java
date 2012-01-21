@@ -24,6 +24,9 @@ public class MCBansLogger {
 
 	public MCBansLogger(MCBansPlugin plugin) {
 		this.plugin = plugin;
+	}
+
+	public void setup() {
 		logFile = new File(plugin.config.getLogFile());
 	}
 

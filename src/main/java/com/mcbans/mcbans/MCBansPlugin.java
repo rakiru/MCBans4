@@ -13,8 +13,8 @@ public class MCBansPlugin extends JavaPlugin {
 
 	public static final String BUILD_NUMBER = "@@BUILDVERSION@@";
 	public static final String GIT_REVISION = "@@GITREVISION@@";
-	public final MCBansLogger log = new MCBansLogger(this);
 	public final Config config = new Config(this);
+	public final MCBansLogger log = new MCBansLogger(this);
 	public final Language lang = new Language();
 	private boolean isOnline = true;
 
@@ -27,6 +27,9 @@ public class MCBansPlugin extends JavaPlugin {
 	public void onEnable() {
 		// Load config
 		config.load();
+
+		// Setup logger
+		log.setup();
 
 		// Get plugin info from plugin.yml
 		PluginDescriptionFile pdfFile = this.getDescription();
