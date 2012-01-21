@@ -2,6 +2,10 @@ package com.mcbans.mcbans;
 
 public class Language {
 
+	public void reload() {
+		
+	}
+
 	public String getFormat() {
 		return "";
 	}

@@ -1,7 +1,6 @@
 package com.mcbans.mcbans;
 
 import java.io.File;
-import java.io.IOException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 /**

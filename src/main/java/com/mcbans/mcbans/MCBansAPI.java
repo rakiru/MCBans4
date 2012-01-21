@@ -16,6 +16,7 @@ public class MCBansAPI {
 	private Config config;
 	private HashMap<String, Boolean> isStaffList = new HashMap<String, Boolean>();
 
+	@SuppressWarnings("LeakingThisInConstructor")
 	public MCBansAPI(MCBansPlugin plugin) {
 		this.plugin = plugin;
 		this.config = plugin.config;

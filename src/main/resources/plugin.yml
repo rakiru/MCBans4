@@ -30,7 +30,7 @@ commands:
   mcbans:
     description: Check status of MCBans and toggle online mode of plugin
     permission: mcbans.mcbans
-    usage: /mcbans [status|online|offline]
+    usage: /mcbans [version|online|offline|status|reload <settings|language>]
 
 permissions:
   mcbans.*:

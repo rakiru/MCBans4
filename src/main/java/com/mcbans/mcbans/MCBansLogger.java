@@ -1,7 +1,14 @@
 package com.mcbans.mcbans;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.bukkit.Bukkit;
+import org.bukkit.scheduler.BukkitScheduler;
 
 /**
  * Adds a debug method, and prefixes all log messages with [MCBans]
@@ -11,10 +18,13 @@ import java.util.logging.Logger;
 public class MCBansLogger {
 
 	public static final Logger logger = Logger.getLogger("Minecraft");
+	private static final SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy.MM.dd hh:mm:ss");
 	private final MCBansPlugin plugin;
+	private File logFile;
 
 	public MCBansLogger(MCBansPlugin plugin) {
 		this.plugin = plugin;
+		logFile = new File(plugin.config.getLogFile());
 	}
 
 	/**
@@ -112,6 +122,12 @@ public class MCBansLogger {
 	 * @param s
 	 */
 	public void write(String s) {
-		//Not implemented yet
+		try {
+			PrintWriter writer = new PrintWriter(logFile);
+			writer.print(dateFormat.format(new Date()));
+			writer.println(s);
+		} catch (FileNotFoundException ex) {
+			warning("Log file not found", false);
+		}
 	}
 }
