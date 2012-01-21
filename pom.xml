@@ -23,8 +23,8 @@
     <!-- Repository locations -->
     <repositories>
         <repository>
-            <id>bukkit-repo</id>
-            <url>http://repo.bukkit.org/content/repositories/releases/</url>
+            <id>repobo-snap</id>
+            <url>http://repo.bukkit.org/content/groups/public</url>
         </repository>
         <repository>
             <id>spout-repo</id>
