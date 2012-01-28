@@ -42,7 +42,7 @@ public class Config {
 		config.addDefault("server-connection-throttle.connection-count-limit", 5);
 		config.addDefault("server-connection-throttle.lockout-message", "Connecting too quickly. Please wait a few minutes.");
 		config.addDefault("server-connection-throttle.lockout-time", 20);
-		config.options().copyDefaults();
+		config.options().copyDefaults(true);
 		plugin.saveConfig();
 	}
 
