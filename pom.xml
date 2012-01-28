@@ -30,10 +30,6 @@
             <id>spout-repo</id>
             <url>http://repo.getspout.org</url>
         </repository>
-        <repository>
-            <id>json-repo</id>
-            <url>http://json.org</url>
-        </repository>
     </repositories>
 
     <!-- Dependencies -->
@@ -51,14 +47,6 @@
             <groupId>org.getspout</groupId>
             <artifactId>spoutapi</artifactId>
             <version>dev-SNAPSHOT</version>
-            <type>jar</type>
-            <scope>compile</scope>
-        </dependency>
-        <!-- JSON -->
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20090211</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>

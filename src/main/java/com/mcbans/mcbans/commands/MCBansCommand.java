@@ -13,6 +13,8 @@ import org.bukkit.command.CommandSender;
 public class MCBansCommand implements CommandExecutor {
 
 	private final ChatColor COLOUR = ChatColor.GOLD;
+	private final ChatColor COLOUR_ERROR = ChatColor.RED;
+	private final ChatColor COLOUR_SUCCESS = ChatColor.GREEN;
 	private final MCBansPlugin plugin;
 
 	public MCBansCommand(MCBansPlugin plugin) {
@@ -37,19 +39,31 @@ public class MCBansCommand implements CommandExecutor {
 			sender.sendMessage("GIT REV: " + MCBansPlugin.GIT_REVISION);
 		} else if (args[0].equalsIgnoreCase("online")) {
 			plugin.setOnline(true);
+			sender.sendMessage(COLOUR + "MCBans is now running in online mode.");
 		} else if (args[0].equalsIgnoreCase("offline")) {
 			plugin.setOnline(false);
+			sender.sendMessage(COLOUR + "MCBans is now running in offline mode.");
 		} else if (args[0].equalsIgnoreCase("status")) {
-			sender.sendMessage(COLOUR + "MCBans is currently running in " + (plugin.isOnline() ? ChatColor.GREEN + "online" : ChatColor.RED + "offline") + COLOUR + " mode.");
+			sender.sendMessage(COLOUR + "MCBans is currently running in " + (plugin.isOnline() ? COLOUR_SUCCESS + "online" : COLOUR_ERROR + "offline") + COLOUR + " mode.");
 		} else if (args[0].equalsIgnoreCase("reload")) {
-			plugin.reloadConfig();
-			plugin.lang.reload();
+			if (args.length < 2) {
+				sender.sendMessage(COLOUR_ERROR + "You must specify what you want to reload");
+				return false;
+			}
+			if (args[1].equalsIgnoreCase("settings") || args[1].equalsIgnoreCase("config") || args[1].equalsIgnoreCase("conf")) {
+				plugin.reloadConfig();
+			} else if (args[1].equalsIgnoreCase("language") || args[1].equalsIgnoreCase("lang")) {
+				plugin.lang.reload();
+			} else {
+				sender.sendMessage(COLOUR_ERROR + "Available options to reload: settings, language");
+			}
 		} else if (args[0].equalsIgnoreCase("magic")) {
 			sender.sendMessage(ChatColor.MAGIC + "Indeed.");
+		} else {
+			return false;
 		}
 
-		//Ban ban = new Ban();
-		//ban.start();
+		// Everything went fine! \o/
 		return true;
 	}
 }

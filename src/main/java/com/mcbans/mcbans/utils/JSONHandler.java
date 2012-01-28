@@ -71,7 +71,7 @@ public class JSONHandler {
 	public String requestFromAPI(String data) {
 		try {
 			plugin.log.debug("Sending request!");
-			URL url = new URL("http://72.10.39.172/v2/" + this.apiKey);
+			URL url = new URL("http://api.mcbans.com/v2/" + this.apiKey);
 			URLConnection connection = url.openConnection();
 			connection.setConnectTimeout(5000);
 			connection.setReadTimeout(5000);

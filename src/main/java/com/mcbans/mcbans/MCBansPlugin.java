@@ -27,6 +27,7 @@ public class MCBansPlugin extends JavaPlugin {
 	public void onEnable() {
 		// Load config
 		config.load();
+		saveConfig();
 
 		// Setup logger
 		log.setup();
@@ -41,7 +42,6 @@ public class MCBansPlugin extends JavaPlugin {
 		getCommand("ban").setExecutor(new BanCommand(this));
 		getCommand("unban").setExecutor(new UnbanCommand(this));
 		getCommand("kick").setExecutor(new KickCommand(this));
-		getCommand("tempban").setExecutor(new TempbanCommand(this));
 
 		// Output to console that plugin is enabled
 		log.info(pdfFile.getName() + " version " + pdfFile.getVersion() + " enabled!");
