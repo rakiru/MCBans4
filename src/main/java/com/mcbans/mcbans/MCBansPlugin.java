@@ -27,7 +27,6 @@ public class MCBansPlugin extends JavaPlugin {
 	public void onEnable() {
 		// Load config
 		config.load();
-		saveConfig();
 
 		// Setup logger
 		log.setup();
