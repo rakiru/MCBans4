@@ -13,7 +13,7 @@ commands:
     usage: /kick <player> - kicks a player from the server
   ban:
     description: Ban a player from the server
-    permission: mcbans.ban
+    permission: mcbans.ban.ban
     usage: /ban [-grt] <player> [<duration> <m[inute[s]]|h[our[s]]|d[ay[s]]>] [reason]
   unban:
     description: Unban a player from the server
@@ -33,11 +33,13 @@ permissions:
     description: All MCBans permissions
     default: op
     children:
-      mcbans.ban: true
+      mcbans.ban.*: true
       mcbans.lookup: true
       mcbans.mcbans: true
       mcbans.kick: true
-  mcbans.ban:
+      mcbans.mcbans.*: true
+      mcbans.alerts.*: true
+  mcbans.ban.*:
     description: All ban types
     default: op
     children:
@@ -45,19 +47,68 @@ permissions:
       mcbans.ban.global: true
       mcbans.ban.temp: true
       mcbans.ban.unban: true
+  mcbans.ban.ban:
+    description: Required to use the ban command
   mcbans.ban.local:
     description: Locally ban a player
+    children:
+      mcbans.ban.ban: true
   mcbans.ban.global:
     description: Globally ban a player
+    children:
+      mcbans.ban.ban: true
   mcbans.ban.temp:
     description: Temporarily ban a player
+    children:
+      mcbans.ban.ban: true
   mcbans.ban.unban:
     description: Unban a player
   mcbans.kick:
     description: Kick a player
   mcbans.lookup:
     description: Lookup MCBans player record
-  mcbans.mcbans:
+  mcbans.mcbans.*:
     description: Misc MCBans functions
-  mcbans.alerts:
+    default: op
+    children:
+      mcbans.mcbans.version: true
+      mcbans.mcbans.status: true
+      mcbans.mcbans.mode.*: true
+      mcbans.mcbans.reload.*: true
+  mcbans.mcbans.version:
+    description: Get version information for the MCBans plugin
+  mcbans.mcbans.status:
+    description: Get status information on the MCBans plugin
+  mcbans.mcbans.mode.*:
+    description: Set the mode of the MCBans plugin
+    default: op
+    children:
+      mcbans.mcbans.mode.online: true
+      mcbans.mcbans.mode.offline: true
+  mcbans.mcbans.mode.online:
+    description: Set the MCBans plugin to online mode
+  mcbans.mcbans.mode.offline:
+    description: Set the MCBans plugin to offline mode
+  mcbans.mcbans.reload.*:
+    description: Reload the MCBans plugin
+    default: op
+    children:
+      mcbans.mcbans.reload.settings: true
+      mcbans.mcbans.reload.language: true
+  mcbans.mcbans.reload.settings:
+    description: Reload the MCBans config file
+  mcbans.mcbans.reload.language:
+    description: Reload the MCBans language file
+  mcbans.alerts.*:
     description: View MCBans alerts such as update reminders
+    default: op
+    children:
+      mcbans.alerts.previousbans: true
+      mcbans.alerts.altaccounts: true
+      mcbans.alerts.update: true
+  mcbans.alerts.previousbans:
+    description: View MCBans alerts about previous bans a connecting player has
+  mcbans.alerts.altaccounts:
+    description: View MCBans alerts about alt accounts a connecting player has
+  mcbans.alerts.update:
+    description: View MCBans alerts about new versions of MCBans
