@@ -20,16 +20,16 @@ public class Config {
 	public void load() {
 		plugin.reloadConfig();
 		config = plugin.getConfig();
-		config.addDefault("api-key", "API-KEY-HERE");
+		config.addDefault("general.api-key", "API-KEY-HERE");
+		config.addDefault("general.on-join-mcbans-message", true);
+		config.addDefault("general.minimum-rep", 8);
+		config.addDefault("general.callback-interval", 900000);
 		config.addDefault("default-reasons.local-ban", "You have been banned");
 		config.addDefault("default-reasons.temp-ban", "You have been temporarily banned");
 		config.addDefault("default-reasons.kick", "You have been kicked");
 		config.addDefault("logging.debug-mode", false);
 		config.addDefault("logging.log-actions", true);
 		config.addDefault("logging.log-file", "plugins/mcbans/actions.log");
-		config.addDefault("on-join-mcbans-message", true);
-		config.addDefault("minimum-rep", 8);
-		config.addDefault("callback-interval", 900000);
 		config.addDefault("alt-limit.enable-maximum-alts", false);
 		config.addDefault("alt-limit.maximum-alts", 3);
 		config.addDefault("user-connection-throttle.enable-throttle", true);
