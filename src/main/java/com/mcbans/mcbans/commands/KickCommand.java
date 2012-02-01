@@ -42,10 +42,12 @@ public class KickCommand implements CommandExecutor {
 			default:
 				//More than one argument - player to be kicked and reason
 				playerName = args[0];
-				kickReason = args[1];
+				StringBuilder sb = new StringBuilder(args[1]);
 				for (int i = 2; i < args.length; i++) {
-					kickReason += " " + args[i];
+					sb.append(' ');
+					sb.append(args[i]);
 				}
+				kickReason = sb.toString();
 				break;
 		}
 
