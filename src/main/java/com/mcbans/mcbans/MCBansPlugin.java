@@ -6,6 +6,9 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.command.CommandSender;
 
+//TODO: Write custom event for bans
+//TODO: Write local ban backup system - MiniDB?
+
 /**
  * MCBans 4 main plugin
  *
@@ -47,6 +50,7 @@ public class MCBansPlugin extends JavaPlugin {
 
 		// Output to console that plugin is enabled
 		log.info(pdfFile.getName() + " version " + pdfFile.getVersion() + " enabled!");
+		log.info("Build number:" + BUILD_NUMBER + " - Git revision: " + GIT_REVISION + " - running API version " + MCBansAPI.VERSION_MAJOR + '.' + MCBansAPI.VERSION_MINOR);
 	}
 
 	/**

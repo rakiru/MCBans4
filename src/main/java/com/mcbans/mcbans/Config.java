@@ -42,6 +42,7 @@ public class Config {
 		config.addDefault("server-connection-throttle.connection-count-limit", 5);
 		config.addDefault("server-connection-throttle.lockout-message", "Connecting too quickly. Please wait a few minutes.");
 		config.addDefault("server-connection-throttle.lockout-time", 20);
+		config.addDefault("plugins.flag-handler-timeout", 3000);
 		config.options().copyDefaults(true);
 		plugin.saveConfig();
 	}
@@ -166,6 +167,14 @@ public class Config {
 
 	public int getServerLockoutTime() {
 		int time = config.getInt("server-connection-throttle.lockout-time");
+		if (time < 1) {
+			time = 10;
+		}
+		return time;
+	}
+
+	public int getFlagHandlerTimeout() {
+		int time = config.getInt("plugins.flag-handler-timeout");
 		if (time < 1) {
 			time = 10;
 		}

@@ -18,7 +18,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 public class MCBansLogger {
 
 	public static final Logger logger = Logger.getLogger("Minecraft");
-	private static final SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy.MM.dd hh:mm:ss");
+	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
 	private final MCBansPlugin plugin;
 	private File logFile;
 
@@ -31,6 +31,30 @@ public class MCBansLogger {
 	}
 
 	/**
+	 * Log actions (bans, etc.)
+	 *
+	 * @param s Message to log
+	 * @param write Whether or not to write to MCBans log
+	 */
+	public void action(String s, boolean write) {
+		if (plugin.config.isLoggingActions()) {
+			logger.log(Level.INFO, "[MCBans] " + s);
+			if (write) {
+				write(s);
+			}
+		}
+	}
+
+	/**
+	 * Log actions (bans, etc.) - writes to MCBans log
+	 *
+	 * @param s Message to log
+	 */
+	public void action(String s) {
+		debug(s, true);
+	}
+
+	/**
 	 * Debug level
 	 *
 	 * @param s Message to log
@@ -39,9 +63,9 @@ public class MCBansLogger {
 	public void debug(String s, boolean write) {
 		if (plugin.config.isDebug()) {
 			logger.log(Level.INFO, "[MCBans DEBUG] " + s);
-		}
-		if (write) {
-			write(s);
+			if (write) {
+				write("[DEBUG] " + s);
+			}
 		}
 	}
 
@@ -128,6 +152,7 @@ public class MCBansLogger {
 		try {
 			PrintWriter writer = new PrintWriter(logFile);
 			writer.print(dateFormat.format(new Date()));
+			writer.print(' ');
 			writer.println(s);
 			writer.flush();
 		} catch (FileNotFoundException ex) {

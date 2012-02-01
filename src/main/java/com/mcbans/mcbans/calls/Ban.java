@@ -51,25 +51,16 @@ public class Ban implements Runnable {
 	}
 
 	public void run() {
-		//Allow max of 3 seconds for handlers to do their stuff before continuing (add this as a config option at some point)
-		if (handlersLeft > 0 || timeAdded - System.currentTimeMillis() < 3000) {
+		//Allow max of 3 seconds (default) for handlers to do their stuff before continuing
+		if (handlersLeft > 0 || timeAdded - System.currentTimeMillis() < plugin.config.getFlagHandlerTimeout()) {
 			try {
 				Thread.sleep(50);
 			} catch (InterruptedException ex) {
 				Logger.getLogger(Ban.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		}
-		Player player;
-		try {
-			//TODO: Tdiy this up - seriously
-			player = PlayerMethods.getPlayer(plugin, playerName);
-			playerName = PlayerMethods.getPlayerName(plugin, player);
-			//Player may have rejoined in the time taken for the handlers to do their stuff
-			PlayerMethods.kickPlayer(plugin, player, plugin.lang.getFormat("kickMessagePlayer", playerName, adminName, reason));
-			ban();
-		} catch (InterruptedException e) {
-			plugin.log.debug(e.toString());
-		}
+		ban();
+		//TODO: Check if the player is online and kick them if they are, in case they got back on during the callback
 	}
 
 	private void ban() {
@@ -89,20 +80,16 @@ public class Ban implements Runnable {
 			//Several possible response codes
 			if (result.get("result").equals("y")) {
 				//Success!
-
 			} else if (result.get("result").equals("e")) {
 				//Error :(
-
 			} else if (result.get("result").equals("w")) {
 				//Warning
-
 			} else if (result.get("result").equals("s")) {
-				//Something
-
+				//Server group
 			} else if (result.get("result").equals("a")) {
 				//Already banned
-
 			}
+			plugin.log.action(adminName + " attempted to ban " + playerName + '[' + playerIP + " with type " + banType.toString() + " for reason " + reason);
 		} catch (NullPointerException ex) {
 			plugin.log.debug(ex.toString());
 		}

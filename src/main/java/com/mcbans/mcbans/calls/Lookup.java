@@ -60,5 +60,6 @@ public class Lookup implements Runnable {
 		} catch (NullPointerException ex) {
 			plugin.log.debug(ex.toString());
 		}
+		plugin.log.action(senderName + " attempted to lookup " + playerName);
 	}
 }

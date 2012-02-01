@@ -6,6 +6,8 @@ import com.mcbans.mcbans.calls.*;
 import java.util.HashMap;
 import org.bukkit.entity.Player;
 
+//TODO: Move this into the api package
+
 /**
  *
  * @author Sean (rakiru)
@@ -57,7 +59,7 @@ public class MCBansAPI {
 	 * @param measure Type of time units to temporarily ban for
 	 */
 	private void banPlayer(String playerName, String playerIP, BanType type, String reason, String adminName, String duration, String measure) {
-		//TODO: Run ban callback here
+		Ban ban = new Ban(plugin, playerName, adminName, reason, type, playerIP, duration, measure, 0);
 		if (type == BanType.GLOBAL_BAN) {
 			kickPlayer(playerName, "You have been globally banned. Check MCBans.com", adminName);
 		} else {
@@ -236,7 +238,7 @@ public class MCBansAPI {
 		if (player != null) {
 			player.kickPlayer(reason);
 		}
-		//TODO: Log to mcbans log file
+		plugin.log.action(adminName + " kicked " + playerName + '[' + player.getAddress().toString() + "] for reason " + reason);
 	}
 
 	/**

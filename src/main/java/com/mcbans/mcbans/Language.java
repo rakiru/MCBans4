@@ -1,5 +1,6 @@
 package com.mcbans.mcbans;
 
+//TODO: This. The whole class. It should look similar to Config when done.
 public class Language {
 
 	public void reload() {
