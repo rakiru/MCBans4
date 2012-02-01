@@ -1,5 +1,6 @@
 package com.mcbans.mcbans;
 
+import com.mcbans.mcbans.api.BanEvent;
 import com.mcbans.mcbans.api.MCBansPluginManager;
 import com.mcbans.mcbans.utils.*;
 import com.mcbans.mcbans.calls.*;

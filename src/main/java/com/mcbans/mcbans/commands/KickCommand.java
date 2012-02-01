@@ -1,5 +1,6 @@
 package com.mcbans.mcbans.commands;
 
+import com.mcbans.mcbans.MCBansAPI;
 import com.mcbans.mcbans.MCBansPlugin;
 import java.util.List;
 import org.bukkit.command.Command;
@@ -72,7 +73,7 @@ public class KickCommand implements CommandExecutor {
 		}
 
 		//Kick player
-		player.kickPlayer(plugin.lang.getFormat("kickMessagePlayer", playerName, adminName, kickReason));
+		MCBansAPI.getInstance().kickPlayer(playerName, kickReason, adminName);
 		//Tell everyone that the player has been kicked
 		plugin.getServer().broadcastMessage(plugin.lang.getFormat("kickMessageSuccess", playerName, adminName, kickReason));
 

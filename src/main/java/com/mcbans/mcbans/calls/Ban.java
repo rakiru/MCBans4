@@ -2,6 +2,7 @@ package com.mcbans.mcbans.calls;
 
 import com.mcbans.mcbans.BanType;
 import com.mcbans.mcbans.MCBansPlugin;
+import com.mcbans.mcbans.api.BanEvent;
 import com.mcbans.mcbans.utils.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,6 +12,7 @@ import java.util.logging.Logger;
 import org.bukkit.entity.Player;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.bukkit.Bukkit;
 
 /**
  *
@@ -61,6 +63,8 @@ public class Ban implements Runnable {
 		}
 		ban();
 		//TODO: Check if the player is online and kick them if they are, in case they got back on during the callback
+		//Call the event here so that everything else is done-and-dusted, in case we need to pass more information to it
+		Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new EventFirer(adminName, playerName, playerIP, reason, time, timeUnit, banType));
 	}
 
 	private void ban() {
