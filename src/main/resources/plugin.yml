@@ -61,6 +61,18 @@ permissions:
     description: Temporarily ban a player
     children:
       mcbans.ban.ban: true
+  mcbans.ban.rollback:
+    description: Rollback a player on ban
+    children:
+      mcbans.ban.ban: true
+  mcbans.ban.proof:
+    description: Upload block-edit proof with ban
+    children:
+      mcbans.ban.ban: true
+  mcbans.ban.screenshot:
+    description: Take screenshot of command user's screen using Spoutcraft
+    children:
+      mcbans.ban.ban: true
   mcbans.ban.unban:
     description: Unban a player
   mcbans.kick:
