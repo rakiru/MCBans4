@@ -129,6 +129,7 @@ public class MCBansLogger {
 			PrintWriter writer = new PrintWriter(logFile);
 			writer.print(dateFormat.format(new Date()));
 			writer.println(s);
+			writer.flush();
 		} catch (FileNotFoundException ex) {
 			warning("Log file not found", false);
 		}

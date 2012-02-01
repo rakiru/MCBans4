@@ -1,5 +1,6 @@
 package com.mcbans.mcbans;
 
+import com.mcbans.mcbans.api.MCBansPluginManager;
 import com.mcbans.mcbans.utils.*;
 import com.mcbans.mcbans.calls.*;
 import java.util.HashMap;
@@ -11,16 +12,28 @@ import org.bukkit.entity.Player;
  */
 public class MCBansAPI {
 
-	public static MCBansAPI instance;
+	public static final int VERSION_MAJOR = 1; //Increments when breakages may occur due to changes
+	public static final int VERSION_MINOR = 1; //Increments when a change has been made, resets to 1 when major version is changed
+	public static final String VALID_PLAYER_NAME_REGEX = "^\\w{2,16}$";
+	private static MCBansAPI instance;
 	private MCBansPlugin plugin;
+	private MCBansPluginManager pluginManager;
 	private Config config;
 	private HashMap<String, Boolean> isStaffList = new HashMap<String, Boolean>();
 
-	@SuppressWarnings("LeakingThisInConstructor")
 	public MCBansAPI(MCBansPlugin plugin) {
 		this.plugin = plugin;
 		this.config = plugin.config;
-		MCBansAPI.instance = this;
+		this.pluginManager = pluginManager;
+	}
+
+	/**
+	 * Must be called before any other method to do some start-up magic
+	 *
+	 * @param plugin Instance of the MCBans plugin
+	 */
+	public static void initialise(MCBansPlugin plugin) {
+		MCBansAPI.instance = new MCBansAPI(plugin);
 	}
 
 	/**
@@ -28,7 +41,7 @@ public class MCBansAPI {
 	 *
 	 * @return The instance of MCBansAPI
 	 */
-	private static MCBansAPI getInstance() {
+	public static MCBansAPI getInstance() {
 		return instance;
 	}
 
@@ -45,7 +58,7 @@ public class MCBansAPI {
 	 */
 	private void banPlayer(String playerName, String playerIP, BanType type, String reason, String adminName, String duration, String measure) {
 		//TODO: Run ban callback here
-		if (type == BanType.GLOBAL) {
+		if (type == BanType.GLOBAL_BAN) {
 			kickPlayer(playerName, "You have been globally banned. Check MCBans.com", adminName);
 		} else {
 			kickPlayer(playerName, reason, adminName);
@@ -74,7 +87,7 @@ public class MCBansAPI {
 	 * @param adminName Name to be attached as player who placed the ban
 	 */
 	public void globalBanPlayer(String playerName, String playerIP, String reason, String adminName) {
-		banPlayer(playerName, playerIP, BanType.GLOBAL, reason, adminName);
+		banPlayer(playerName, playerIP, BanType.GLOBAL_BAN, reason, adminName);
 	}
 
 	/**
@@ -107,7 +120,7 @@ public class MCBansAPI {
 	 * @param adminName Name to be attached as player who placed the ban
 	 */
 	public void localBanPlayer(String playerName, String playerIP, String reason, String adminName) {
-		banPlayer(playerName, playerIP, BanType.LOCAL, reason, adminName);
+		banPlayer(playerName, playerIP, BanType.LOCAL_BAN, reason, adminName);
 	}
 
 	/**
@@ -151,7 +164,7 @@ public class MCBansAPI {
 	 * @param adminName Name to be attached as player who placed the ban
 	 */
 	public void tempBanPlayer(String playerName, String playerIP, float time, String units, String reason, String adminName) {
-		banPlayer(playerName, playerIP, BanType.TEMP, reason, adminName);
+		banPlayer(playerName, playerIP, BanType.TEMP_BAN, reason, adminName);
 	}
 
 	/**
@@ -258,6 +271,10 @@ public class MCBansAPI {
 			//TODO: Call MCBans server and check
 			return false;
 		}
+	}
+
+	public MCBansPluginManager getPluginManager() {
+		return pluginManager;
 	}
 
 	protected void setMCBansStaff(String playerName, boolean isStaff) {
