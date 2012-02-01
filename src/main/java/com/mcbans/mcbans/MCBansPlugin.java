@@ -1,8 +1,10 @@
 package com.mcbans.mcbans;
 
+import com.mcbans.mcbans.api.MCBansPluginManager;
 import com.mcbans.mcbans.commands.*;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.command.CommandSender;
 
 /**
  * MCBans 4 main plugin
@@ -15,6 +17,7 @@ public class MCBansPlugin extends JavaPlugin {
 	public static final String GIT_REVISION = "@@GITREVISION@@";
 	public final Config config = new Config(this);
 	public final MCBansLogger log = new MCBansLogger(this);
+	public final MCBansPluginManager pluginManager = new MCBansPluginManager(this);
 	public final Language lang = new Language();
 	private boolean isOnline = true;
 
@@ -60,5 +63,14 @@ public class MCBansPlugin extends JavaPlugin {
 	 */
 	public void setOnline(boolean isOnline) {
 		this.isOnline = isOnline;
+	}
+
+	public boolean checkPermission(CommandSender player, String permission) {
+		if (player.hasPermission(permission)) {
+			return true;
+		} else {
+			player.sendMessage(lang.getFormat("permissionDenied"));
+			return false;
+		}
 	}
 }
