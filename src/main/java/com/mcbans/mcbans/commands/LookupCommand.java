@@ -1,9 +1,11 @@
 package com.mcbans.mcbans.commands;
 
+import com.mcbans.mcbans.MCBansAPI;
 import com.mcbans.mcbans.MCBansPlugin;
 import com.mcbans.mcbans.calls.Lookup;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -15,7 +17,7 @@ import org.bukkit.command.CommandSender;
 public class LookupCommand implements CommandExecutor {
 
 	private final MCBansPlugin plugin;
-	private static final Pattern pattern = Pattern.compile("^\\w{3,16}$");
+	private final Pattern validUsername = Pattern.compile(MCBansAPI.VALID_PLAYER_NAME_REGEX);
 
 	public LookupCommand(MCBansPlugin plugin) {
 		this.plugin = plugin;
@@ -38,9 +40,9 @@ public class LookupCommand implements CommandExecutor {
 			sender.sendMessage(plugin.lang.getFormat("pluginOfflineMode"));
 			return true;
 		}
-		//No point creating a new thread for an invalid player name
-		// Between 3 and 16 characters (inclusive) containing only upper- and lower-case letters and underscores
-		if (!pattern.matcher(args[0]).matches()) {
+		//No point creating a lookup object for an invalid player name
+		//Between 2 and 16 characters (inclusive) containing only upper- and lower-case letters and underscores
+		if (!validUsername.matcher(args[0]).matches()) {
 			sender.sendMessage(plugin.lang.getFormat("invalidPlayerName"));
 			return true;
 		}
@@ -48,8 +50,7 @@ public class LookupCommand implements CommandExecutor {
 		plugin.log.info(sender.getName() + " has looked up " + args[0]);
 
 		//Start new lookup thread - it will get back to the command user when it's ready
-		Thread lookup = new Thread(new Lookup(plugin, args[0], sender, sender.getName()));
-		lookup.start();
+		Bukkit.getScheduler().scheduleAsyncDelayedTask(plugin, new Lookup(plugin, args[0], sender, sender.getName()));
 
 		return true;
 	}
