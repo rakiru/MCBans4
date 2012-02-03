@@ -105,6 +105,9 @@ public class MCBansPlugin extends JavaPlugin {
 		// Setup logger
 		log.setup();
 
+		//Setup the API
+		MCBansAPI.initialise(this);
+
 		// Get plugin info from plugin.yml
 		PluginDescriptionFile pdfFile = this.getDescription();
 		log.info("Using bukkit permissions");

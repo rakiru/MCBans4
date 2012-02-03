@@ -115,12 +115,15 @@ public class BanCommand implements CommandExecutor {
 		}
 
 		//Check flag permissions
-		if (plugin.checkPermission(sender, banType.getPermission())) {
+		if (!plugin.checkPermission(sender, banType.getPermission())) {
+			//TODO: Message player
+			plugin.log.debug("Use of ban type flag without permission", false);
 			return true;
 		}
 		//Check for global ban without reason
 		if (banType == BanType.GLOBAL_BAN && banReason == null) {
 			//TODO: Message player
+			plugin.log.debug("Global ban without reason", false);
 		}
 
 		Player player = plugin.getServer().getPlayerExact(playerName);
@@ -128,7 +131,9 @@ public class BanCommand implements CommandExecutor {
 			playerIP = player.getAddress().toString();
 		}
 
+		plugin.log.debug("Banning...", false);
 		Ban ban = new Ban(plugin, playerName, adminName, banReason, banType, playerIP, time, timeUnit, customFlags.size());
+		ban.run();
 		//Run custom flag handlers
 		for (FlagHandler h : customFlags) {
 			h.run(playerName, adminName, banReason, flagString, args);
