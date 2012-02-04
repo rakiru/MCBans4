@@ -15,7 +15,6 @@ Below is a list of commands supported by MCBans 4.
     * -t - Temp ban, requires the duration to be entered
     * -g - Global ban, requires the reason to be entered
     * -r - Rollback the player using LogBlock
-    * -p - Submit LogBlock proof along with ban
 * /unban <playername>
 
 Coding Standards
