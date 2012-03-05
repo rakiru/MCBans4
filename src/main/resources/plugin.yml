@@ -65,10 +65,6 @@ permissions:
     description: Rollback a player on ban
     children:
       mcbans.ban.ban: true
-  mcbans.ban.proof:
-    description: Upload block-edit proof with ban
-    children:
-      mcbans.ban.ban: true
   mcbans.ban.screenshot:
     description: Take screenshot of command user's screen using Spoutcraft
     children:
