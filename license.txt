@@ -1,1 +1,4 @@
 The rights to all material in this repo belong solely to Sean Gordon unless stated otherwise in the respective material. Use of any or all material within this repo without the direct written consent of Sean Gordon is not allowed.
+
+People/Organisations with permission to use this code:
+- mcBLOCK.IT - BSD 3-Clause License
